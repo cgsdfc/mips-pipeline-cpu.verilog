@@ -46,5 +46,5 @@ diagram of the execution process happening inside the CPU. One can look closely
 at the diagram to reveal some possible RAW data races to see whether bugs
 arose from failing to handle them well.
 
-The code is currently placed in the public domain without any liscen.
+The code is currently placed in the public domain without any license.
 

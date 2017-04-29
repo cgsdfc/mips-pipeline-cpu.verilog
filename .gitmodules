@@ -1,0 +1,3 @@
+[submodule "p5"]
+	path = p5
+	url = ../../p5
