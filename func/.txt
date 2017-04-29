@@ -1,0 +1,3 @@
+Comparing files 0.txt and FUNC.OUT
+FC: no differences encountered
+

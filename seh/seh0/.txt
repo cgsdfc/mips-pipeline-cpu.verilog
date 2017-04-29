@@ -1,0 +1,3 @@
+Comparing files seh0.out and 0.TXT
+FC: no differences encountered
+

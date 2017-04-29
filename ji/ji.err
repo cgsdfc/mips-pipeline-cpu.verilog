@@ -1,0 +1,37 @@
+jal skip0
+	addu $15, $31, $0
+skip0:	ji $15, 40
+nop
+	nop
+	nop
+	nop
+	nop
+	j end0
+	sw $2, 0($0)
+	j end0
+	sw $3, 0($0)
+	j end0
+	sw $4, 0($0)
+	j end0
+	sw $5, 0($0)
+	j end0
+	sw $6, 0($0)
+end0:
+	li $1, 1639241270
+	xor $2, $2, $3
+	xor $3, $3, $4
+	xor $4, $4, $5
+	xor $5, $5, $6
+	xor $6, $6, $1
+	jal skip1
+	xor $12, $31, $0
+Comparing files 0.txt and JI.OUT
+***** 0.txt
+$15 <= 00003030
+$31 <= 00000030
+$15 <= 00000030
+*00000000 <= 8c4f2dd3
+***** JI.OUT
+$15 <= 00003030
+*00000000 <= 8c4f2dd3
+*****
