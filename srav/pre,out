@@ -1,0 +1,15 @@
+
+
+Reset: reset completed.
+
+$ 1 <= 00000001
+$ 2 <= 00000002
+$ 3 <= 00000008
+$ 6 <= fffffff8
+$ 7 <= 00000004
+$ 8 <= 00000002
+$ 9 <= fffffffc
+$10 <= fffffffe
+
+-- program is finished running (dropped off bottom) --
+

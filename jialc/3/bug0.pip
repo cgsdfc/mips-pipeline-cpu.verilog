@@ -1,0 +1,75 @@
+ISim P.20131013 (signature 0x8ef4fb42)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+WARNING:  For instance mips_t/mips/, width 1 of formal port en is not equal to width 32 of actual constant.
+
+# run 1000 ns 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+          0 34010001 00000000 00000000 00000000 00000000
+          1 34020002 34010001 00000000 00000000 00000000
+          2 34030003 34020002 34010001 00000000 00000000
+          3 34040004 34030003 34020002 34010001 00000000
+$ 1 <= 00000001
+          4 34050005 34040004 34030003 34020002 34010001
+$ 2 <= 00000002
+          5 34060006 34050005 34040004 34030003 34020002
+$ 3 <= 00000003
+          6 00000000 34060006 34050005 34040004 34030003
+$ 4 <= 00000004
+          7 0c000c09 00000000 34060006 34050005 34040004
+$ 5 <= 00000005
+          8 ac1f0030 0c000c09 00000000 34060006 34050005
+$ 6 <= 00000006
+          9 341f0000 ac1f0030 0c000c09 00000000 34060006
+         10 8c100030 341f0000 ac1f0030 0c000c09 00000000
+$31 <= 00003024
+         11 f810002c 8c100030 341f0000 ac1f0030 0c000c09
+*00000030 <= 00003024
+         12 00000000 f810002c 8c100030 341f0000 ac1f0030
+$31 <= 00000000
+         13 00000000 f810002c 00000000 8c100030 341f0000
+$16 <= 00003024
+         14 00000000 f810002c 00000000 00000000 8c100030
+         15 08000c18 00000000 f810002c 00000000 00000000
+         16 ac050034 08000c18 00000000 f810002c 00000000
+$31 <= 00003034
+         17 3c01f83b ac050034 08000c18 00000000 f810002c
+         18 3421a5d9 3c01f83b ac050034 08000c18 00000000
+         19 xxxxxxxx 3421a5d9 3c01f83b ac050034 08000c18
+*00000034 <= 00000005
+         20 xxxxxxxx xxxxxxxx 3421a5d9 3c01f83b ac050034
+$ 1 <= f83b0000
+         21 xxxxxxxx xxxxxxxx xxxxxxxx 3421a5d9 3c01f83b
+$ 1 <= f83ba5d9
+         22 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx 3421a5d9
+         23 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         24 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         25 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         26 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         27 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         28 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         29 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         30 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         31 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         32 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         33 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         34 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         35 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         36 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         37 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         38 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         39 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         40 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         41 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         42 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         43 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         44 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         45 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         46 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         47 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         48 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         49 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ISim>  

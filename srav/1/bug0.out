@@ -1,0 +1,121 @@
+ISim P.20131013 (signature 0x8ef4fb42)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+WARNING:  For instance mips_t/mips/, width 1 of formal port en is not equal to width 32 of actual constant.
+
+# run 1000 ns 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+$ 1 <= 00000000
+$ 1 <= 46030000
+$ 2 <= 4603ec68
+$ 2 <= 8c06ec68
+$ 1 <= e9490000
+$ 3 <= e9493009
+$ 1 <= be4f0000
+$ 4 <= be4f49d3
+$ 6 <= 654fdc61
+$ 1 <= d77a0000
+$21 <= d77af5a0
+$ 9 <= d77b5d88
+$ 9 <= d77af5a0
+$ 2 <= 73f91398
+*00000000 <= 73f91398
+$ 2 <= 239f2634
+$ 6 <= cad6163d
+$ 1 <= ab0c0000
+$26 <= ab0c5df8
+$ 9 <= ab0cd1b6
+$ 9 <= ab0c5df8
+*00000004 <= 239f2634
+$ 2 <= 89256010
+$ 6 <= 606c5019
+$ 1 <= 28520000
+$20 <= 2852a02f
+$ 9 <= 28531acd
+$ 9 <= 2852a02f
+*00000008 <= 89256010
+$ 2 <= 1ebb99ec
+$ 6 <= f7f2a9e5
+$ 1 <= 68550000
+$ 9 <= 68554acf
+$21 <= 685575a4
+$21 <= 68554acf
+$ 2 <= e1446614
+*0000000c <= e1446614
+$ 2 <= b641f3b8
+$ 6 <= 5f08c3b1
+$ 1 <= ede00000
+$11 <= ede08287
+$ 9 <= ede10056
+$ 9 <= ede08287
+$ 2 <= 49be0c48
+*00000010 <= 49be0c48
+$ 2 <= 1d580d84
+$ 6 <= f4113d8d
+$ 1 <= 6a8a0000
+$ 7 <= 6a8accae
+$11 <= 6a8aebc3
+$11 <= 6a8accae
+*00000014 <= 1d580d84
+$ 2 <= b2608760
+$ 6 <= 5b29b769
+$ 1 <= ca990000
+$28 <= ca99443e
+$15 <= ca999c0d
+$15 <= ca99443e
+*00000018 <= b2608760
+$ 2 <= 1979013c
+$ 6 <= f0303135
+$ 1 <= 94bd0000
+$28 <= 94bd0c04
+$26 <= 94bd0c04
+$26 <= f94bd0c0
+*0000001c <= 1979013c
+$ 2 <= ae7f7b08
+$ 6 <= 47364b01
+$ 1 <= fb1d0000
+$26 <= fb1db03d
+$17 <= fb1db03d
+$17 <= ffffffff
+*00000020 <= ae7f7b08
+$ 2 <= 058594d4
+$31 <= 000031d8
+$30 <= 000031d8
+$31 <= 000031f4
+$25 <= 000031f4
+$31 <= 00003214
+$26 <= 00003214
+$31 <= 00003238
+$29 <= 00003238
+$31 <= 00003258
+$30 <= 00003258
+$31 <= 0000327c
+$14 <= 0000327c
+$31 <= 000032a4
+$21 <= 000032a4
+$31 <= 000032c8
+$14 <= 000032c8
+$31 <= 000032f0
+$22 <= 000032f0
+$31 <= 0000331c
+$11 <= 0000331c
+$31 <= 00003338
+$18 <= 00003338
+$31 <= 00003358
+$ 7 <= 00003358
+$31 <= 0000337c
+$ 7 <= 0000337c
+$31 <= 0000339c
+$16 <= 0000339c
+$31 <= 000033c0
+$15 <= 000033c0
+$31 <= 000033e8
+$ 7 <= 000033e8
+$31 <= 0000340c
+$ 8 <= 0000340c
+$31 <= 00003434
+$12 <= 00003434
+ISim>  
