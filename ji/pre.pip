@@ -1,0 +1,37 @@
+ISim P.20131013 (signature 0x8ef4fb42)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+WARNING:  For instance mips/inspect/, width 1 of formal port en is not equal to width 32 of actual constant.
+Time resolution is 1 ps
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+          0 2001300c 00000000 00000000 00000000 00000000
+          1 d8010004 2001300c 00000000 00000000 00000000
+          2 00000000 d8010004 2001300c 00000000 00000000
+          3 d8010004 00000000 d8010004 2001300c 00000000
+$ 1 <= 0000300c
+          4 00000000 d8010004 00000000 d8010004 2001300c
+          5 08000c06 00000000 d8010004 00000000 d8010004
+          6 00000000 08000c06 00000000 d8010004 00000000
+          7 3c060006 00000000 08000c06 00000000 d8010004
+          8 xxxxxxxx 3c060006 00000000 08000c06 00000000
+          9 xxxxxxxx xxxxxxxx 3c060006 00000000 08000c06
+         10 xxxxxxxx xxxxxxxx xxxxxxxx 3c060006 00000000
+$ 6 <= 00060000
+         11 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx 3c060006
+         12 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         13 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         14 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         15 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         16 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         17 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         18 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         19 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         20 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         21 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         22 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         23 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+         24 xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ISim>  
