@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 `timescale 1ns / 1ps
-module mips_t;
+module main;
     reg clk;
     reg reset;
     parameter tick = 0.25;

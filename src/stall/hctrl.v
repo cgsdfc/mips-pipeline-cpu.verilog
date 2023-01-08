@@ -52,7 +52,7 @@ module hctrl(input [31:0] instr,
     assign srav = R & ~func[5] & ~func[4] & ~func[3] & func[2] & func[1] & func[0];
 
     assign add = R & func[5] & ~func[4] & ~func[3] & ~func[2] & ~func[1] & ~func[0];
-
+    
     assign addu = R & func[5] & ~func[4] & ~func[3] & ~func[2] & ~func[1] & func[0];
     assign subu = R & func[5] & ~func[4] & ~func[3] & ~func[2] & func[1] & func[0];
     assign sub  = R & func[5] & ~func[4] & ~func[3] & ~func[2] & func[1] & ~func[0];
