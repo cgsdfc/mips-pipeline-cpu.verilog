@@ -20,11 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-module bypass_rt_mem_(input [31:0] instrD,
-                          input [31:0] instrE,
-                          input [31:0] instrM,
-                          input [31:0] instrW,
-                          output bypass_rt_mem);
+module forward_btype(input [31:0] instrD,
+                        input [31:0] instrE,
+                        input [31:0] instrM,
+                        input [31:0] instrW,
+                        output reg [1:0] forward_rs_b,
+                        output reg [1:0] forward_rt_b);
     wire [4:0] rs_D;
     wire [4:0] rt_D;
     wire [4:0] rd_D;
@@ -38,27 +39,68 @@ module bypass_rt_mem_(input [31:0] instrD,
     wire [4:0] rt_W;
     wire [4:0] rd_W;
 
+    wire forward_rs_M, forward_rs_W, forward_rt_M, forward_rt_W;
 
-    wire bypass_rt_W0 ;
-    wire bypass_rt_W1 ;
-    wire bypass_rt_W2 ;
-    wire bypass_rt_W3 ;
-    wire bypass_rt_W ;
+    wire forward_rs_M0;
+    wire forward_rs_M1;
+    wire forward_rs_M2;
 
+    wire forward_rs_W0;
+    wire forward_rs_W1;
+    wire forward_rs_W2;
+    wire forward_rs_W3;
 
-    assign bypass_rt_W0 = store_M & cal_r_W & rd_W == rt_M & rt_M ! = 0;
-    assign bypass_rt_W1 = store_M & cal_i_W & rt_W == rt_M & rt_M ! = 0;
-    assign bypass_rt_W2 = store_M & load_W  & rt_W == rt_M & rt_M ! = 0;
-    assign bypass_rt_W3 = store_M & jal_W  & 31 == rt_M;
+    wire forward_rt_M0;
+    wire forward_rt_M1;
+    wire forward_rt_M2;
 
+    wire forward_rt_W0;
+    wire forward_rt_W1;
+    wire forward_rt_W2;
+    wire forward_rt_W3;
 
-    assign bypass_rt_W =
-           bypass_rt_W0 |
-           bypass_rt_W1 |
-           bypass_rt_W2 |
-           bypass_rt_W3 ;
+    assign forward_rs_M0 = b_type_D & cal_r_M & rd_M == rs_D & rs_D ! = 0;
+    assign forward_rs_M1 = b_type_D & cal_i_M & rt_M == rs_D & rs_D ! = 0;
+    assign forward_rs_M2 = b_type_D & jal_M & 31 == rs_D;
 
-    assign bypass_rt_mem = bypass_rt_W;
+    assign forward_rs_W0 = b_type_D & cal_r_W & rd_W == rs_D & rs_D ! = 0;
+    assign forward_rs_W1 = b_type_D & cal_i_W & rt_W == rs_D & rs_D ! = 0;
+    assign forward_rs_W2 = b_type_D & load_W & rt_W == rs_D  & rs_D ! = 0;
+    assign forward_rs_W3 = b_type_D & jal_W & 31 == rs_D;
+
+    assign forward_rt_M0 = b_type_D & cal_r_M & rd_M == rt_D & rt_D ! = 0;
+    assign forward_rt_M1 = b_type_D & cal_i_M & rt_M == rt_D & rt_D ! = 0;
+    assign forward_rt_M2 = b_type_D & jal_M & 31 == rt_D;
+
+    assign forward_rt_W0 = b_type_D & cal_r_W & rd_W == rt_D & rt_D ! = 0;
+    assign forward_rt_W1 = b_type_D & cal_i_W & rt_W == rt_D & rt_D ! = 0;
+    assign forward_rt_W2 = b_type_D & load_W &  rt_W == rt_D & rt_D ! = 0;
+    assign forward_rt_W3 = b_type_D & jal_W &  31 == rt_D;
+
+    assign  forward_rs_M = forward_rs_M0 | forward_rs_M1|forward_rs_M2;
+    assign  forward_rs_W = forward_rs_W0 | forward_rs_W1 | forward_rs_W2 | forward_rs_W3;
+
+    assign  forward_rt_M = forward_rt_M0 | forward_rt_M1|forward_rt_M2;
+    assign  forward_rt_W = forward_rt_W0 | forward_rt_W1 | forward_rt_W2 | forward_rt_W3;
+
+    always @(*)
+    begin
+        if (forward_rs_M)
+            forward_rs_b = 1;
+        else if (forward_rs_W)
+            forward_rs_b = 2;
+        else
+            forward_rs_b = 0;
+    end
+    always @(*)
+    begin
+        if (forward_rt_M)
+            forward_rt_b = 1;
+        else if (forward_rt_W)
+            forward_rt_b = 2;
+        else
+            forward_rt_b = 0;
+    end
 
     hctrl hctrl_D (
               .instr(instrD),

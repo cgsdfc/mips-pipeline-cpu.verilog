@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-module bypass_rt_alu_(input [31:0] instrD,
+module forward_rt_mem_(input [31:0] instrD,
                           input [31:0] instrE,
                           input [31:0] instrM,
                           input [31:0] instrW,
-                          output reg [1:0] bypass_rt_alu);
+                          output forward_rt_mem);
     wire [4:0] rs_D;
     wire [4:0] rt_D;
     wire [4:0] rd_D;
@@ -38,79 +38,27 @@ module bypass_rt_alu_(input [31:0] instrD,
     wire [4:0] rt_W;
     wire [4:0] rd_W;
 
-    wire bypass_rt_M0;
-    wire bypass_rt_M1;
-    wire bypass_rt_M2;
-    wire bypass_rt_M3;
-    wire bypass_rt_M4;
-    wire bypass_rt_M5;
-    wire bypass_rt_M;
 
-    wire bypass_rt_W0 ;
-    wire bypass_rt_W1 ;
-    wire bypass_rt_W2 ;
-    wire bypass_rt_W3 ;
-    wire bypass_rt_W4 ;
-    wire bypass_rt_W5 ;
-    wire bypass_rt_W6 ;
-    wire bypass_rt_W7 ;
-    wire bypass_rt_W ;
-
-    assign bypass_rt_M0 = cal_r_E & cal_r_M & rd_M == rt_E & rt_E ! = 0;
-    assign bypass_rt_M1 = cal_r_E & cal_i_M & rt_M == rt_E & rt_E ! = 0;
-    assign bypass_rt_M2 = cal_r_E & jal_M & rt_E == 31;
-
-    assign bypass_rt_M3 = store_E & cal_r_M & rd_M == rt_E & rt_E ! = 0;
-    assign bypass_rt_M4 = store_E & cal_i_M & rt_M == rt_E & rt_E ! = 0;
-    assign bypass_rt_M5 = store_E & jal_M & rt_E == 31;
+    wire forward_rt_W0 ;
+    wire forward_rt_W1 ;
+    wire forward_rt_W2 ;
+    wire forward_rt_W3 ;
+    wire forward_rt_W ;
 
 
-    assign bypass_rt_M =
-           bypass_rt_M0 |
-           bypass_rt_M1 |
-           bypass_rt_M2 |
-           bypass_rt_M3 |
-           bypass_rt_M4 |
-           bypass_rt_M5 ;
-
-    assign bypass_rt_W0 = cal_r_E & cal_r_W & rd_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W1 = cal_r_E & cal_i_W & rt_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W2 = cal_r_E & load_W  & rt_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W3 = cal_r_E & jal_W & rt_E == 31;
+    assign forward_rt_W0 = store_M & cal_r_W & rd_W == rt_M & rt_M ! = 0;
+    assign forward_rt_W1 = store_M & cal_i_W & rt_W == rt_M & rt_M ! = 0;
+    assign forward_rt_W2 = store_M & load_W  & rt_W == rt_M & rt_M ! = 0;
+    assign forward_rt_W3 = store_M & jal_W  & 31 == rt_M;
 
 
-    assign bypass_rt_W4 = store_E & cal_r_W & rd_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W5 = store_E & cal_i_W & rt_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W6 = store_E & load_W  & rt_W == rt_E & rt_E ! = 0;
-    assign bypass_rt_W7 = store_E & jal_W & rt_E == 31;
+    assign forward_rt_W =
+           forward_rt_W0 |
+           forward_rt_W1 |
+           forward_rt_W2 |
+           forward_rt_W3 ;
 
-
-    assign bypass_rt_W =
-           bypass_rt_W0 |
-           bypass_rt_W1 |
-           bypass_rt_W2 |
-           bypass_rt_W3 |
-           bypass_rt_W4 |
-           bypass_rt_W5 |
-           bypass_rt_W6 |
-           bypass_rt_W7 ;
-
-
-    always @(*)
-    begin
-        if (bypass_rt_M)
-        begin
-            bypass_rt_alu = 1;
-        end
-        else if (bypass_rt_W)
-        begin
-            bypass_rt_alu = 2;
-        end
-        else
-        begin
-            bypass_rt_alu = 0;
-        end
-    end
+    assign forward_rt_mem = forward_rt_W;
 
     hctrl hctrl_D (
               .instr(instrD),

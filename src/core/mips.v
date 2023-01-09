@@ -87,54 +87,54 @@ module mips(input reset,
 
     wire [31:0] cmp0D, cmp1D;
     wire cmp_outD;
-    wire [1:0] bypass_rs_b;
-    wire [1:0] bypass_rt_b;
-    wire [1:0] bypass_rs_jr;
+    wire [1:0] forward_rs_b;
+    wire [1:0] forward_rt_b;
+    wire [1:0] forward_rs_jr;
     wire [31:0] jrAddrD;
     wire [31:0] ji_AddrD;
-    wire [1:0] bypass_rs_alu;
-    wire [1:0] bypass_rt_alu;
-    wire bypass_rt_mem;
+    wire [1:0] forward_rs_alu;
+    wire [1:0] forward_rt_alu;
+    wire forward_rt_mem;
     wire [31:0] dataM;
     wire [31:0] mem_dataM;
-    wire bypass_rs_grf;
-    wire bypass_rt_grf;
-    wire [1:0] bypass_rt_ji;
+    wire forward_rs_grf;
+    wire forward_rt_grf;
+    wire [1:0] forward_rt_ji;
 
-    bypass_ji bypass_ji (
+    forward_ji forward_ji (
                   .instrD(instrD),
                   .instrE(instrE),
                   .instrM(instrM),
                   .instrW(instrW),
-                  .bypass_rt_ji(bypass_rt_ji)
+                  .forward_rt_ji(forward_rt_ji)
               );
-    bypass_grf bypass_grf (
+    forward_grf forward_grf (
                    .instrD(instrD),
                    .instrE(instrE),
                    .instrM(instrM),
                    .instrW(instrW),
-                   .bypass_rs_grf(bypass_rs_grf),
-                   .bypass_rt_grf(bypass_rt_grf)
+                   .forward_rs_grf(forward_rs_grf),
+                   .forward_rt_grf(forward_rt_grf)
                );
     dmux0 dmux0 (
               .RD2(RD2M),
               .write_data(write_dataW),
               .data(dataM),
-              .bypass_rt_mem(bypass_rt_mem)
+              .forward_rt_mem(forward_rt_mem)
           );
-    bypass_rt_mem_ bypass_rt_mem_ (
+    forward_rt_mem_ forward_rt_mem_ (
                        .instrD(instrD),
                        .instrE(instrE),
                        .instrM(instrM),
                        .instrW(instrW),
-                       .bypass_rt_mem(bypass_rt_mem)
+                       .forward_rt_mem(forward_rt_mem)
                    );
-    bypass_rt_alu_ bypass_rt_alu_ (
+    forward_rt_alu_ forward_rt_alu_ (
                        .instrD(instrD),
                        .instrE(instrE),
                        .instrM(instrM),
                        .instrW(instrW),
-                       .bypass_rt_alu(bypass_rt_alu)
+                       .forward_rt_alu(forward_rt_alu)
                    );
 
 
@@ -143,22 +143,22 @@ module mips(input reset,
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .sel_RD2(sel_RD2E),
-              .bypass_rt_alu(bypass_rt_alu)
+              .forward_rt_alu(forward_rt_alu)
           );
     amux0 amux0 (
               .RD1(RD1E),
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .sel_RD1(sel_RD1E),
-              .bypass_rs_alu(bypass_rs_alu)
+              .forward_rs_alu(forward_rs_alu)
           );
 
-    bypass_rs_alu_ bypass_rs_alu_ (
+    forward_rs_alu_ forward_rs_alu_ (
                        .instrD(instrD),
                        .instrE(instrE),
                        .instrM(instrM),
                        .instrW(instrW),
-                       .bypass_rs_alu(bypass_rs_alu)
+                       .forward_rs_alu(forward_rs_alu)
                    );
     jmux0 jmux0 (
               .RD1(RD1D),
@@ -166,7 +166,7 @@ module mips(input reset,
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .jrAddr(jrAddrD),
-              .bypass_rs_jr(bypass_rs_jr)
+              .forward_rs_jr(forward_rs_jr)
           );
     jmux1 jmux1 (
               .RD2(RD2D),
@@ -174,36 +174,36 @@ module mips(input reset,
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .ji_Addr(ji_AddrD),
-              .bypass_rt_ji(bypass_rt_ji)
+              .forward_rt_ji(forward_rt_ji)
           );
-    bypass_jr bypass_jr (
+    forward_jr forward_jr (
                   .instrD(instrD),
                   .instrE(instrE),
                   .instrM(instrM),
                   .instrW(instrW),
-                  .bypass_rs_jr(bypass_rs_jr)
+                  .forward_rs_jr(forward_rs_jr)
               );
     bmux0 bmux0 (
               .RD1(RD1D),
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .cmp0(cmp0D),
-              .bypass_rs_b(bypass_rs_b)
+              .forward_rs_b(forward_rs_b)
           );
     bmux1 bmux1 (
               .RD2(RD2D),
               .mem_data(mem_dataM),
               .write_data(write_dataW),
               .cmp1(cmp1D),
-              .bypass_rt_b(bypass_rt_b)
+              .forward_rt_b(forward_rt_b)
           );
-    bypass_btype bypass_btype (
+    forward_btype forward_btype (
                      .instrD(instrD),
                      .instrE(instrE),
                      .instrM(instrM),
                      .instrW(instrW),
-                     .bypass_rs_b(bypass_rs_b),
-                     .bypass_rt_b(bypass_rt_b)
+                     .forward_rs_b(forward_rs_b),
+                     .forward_rt_b(forward_rt_b)
                  );
     hstall hstall (
                .instrD(instrD),
@@ -256,8 +256,8 @@ module mips(input reset,
             .RD1(RD1D),
             .RD2(RD2D),
             .write_data(write_dataW),
-            .bypass_rs_grf(bypass_rs_grf),
-            .bypass_rt_grf(bypass_rt_grf)
+            .forward_rs_grf(forward_rs_grf),
+            .forward_rt_grf(forward_rt_grf)
         );
 
     inspect inspect (

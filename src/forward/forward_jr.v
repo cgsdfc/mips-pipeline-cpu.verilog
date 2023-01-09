@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-module bypass_ji(input [31:0] instrD,
+module forward_jr(input [31:0] instrD,
                      input [31:0] instrE,
                      input [31:0] instrM,
                      input [31:0] instrW,
-                     output reg [1:0] bypass_rt_ji);
+                     output reg [1:0] forward_rs_jr);
     wire [4:0] rs_D;
     wire [4:0] rt_D;
     wire [4:0] rd_D;
@@ -38,49 +38,52 @@ module bypass_ji(input [31:0] instrD,
     wire [4:0] rt_W;
     wire [4:0] rd_W;
 
-    wire bypass_rt_E, bypass_rt_M, bypass_rt_W;
+    wire forward_rs_E, forward_rs_M, forward_rs_W;
 
-    wire bypass_rt_M0;
-    wire bypass_rt_M1;
-    wire bypass_rt_M2;
+    wire forward_rs_M0;
+    wire forward_rs_M1;
+    wire forward_rs_M2;
 
-    wire bypass_rt_W0 ;
-    wire bypass_rt_W1 ;
-    wire bypass_rt_W2 ;
-    wire bypass_rt_W3 ;
+    wire forward_rs_W0 ;
+    wire forward_rs_W1 ;
+    wire forward_rs_W2 ;
+    wire forward_rs_W3 ;
 
-    assign bypass_rt_E = ji_D & jal_E & rt_D == 31;
+    assign forward_rs_E = jr_D & jal_E & rs_D == 31;
 
-    assign bypass_rt_M0 = ji_D & jal_M & rt_D == 31;
-    assign bypass_rt_M1 = ji_D & cal_i_M & rt_D == rt_M & rt_D ! = 0;
-    assign bypass_rt_M2 = ji_D & cal_r_M & rt_D == rd_M & rt_D ! = 0;
 
-    assign bypass_rt_W0 = ji_D & jal_W & rt_D == 31;
-    assign bypass_rt_W1 = ji_D & load_W & rt_D == rt_W & rt_D ! = 0;
-    assign bypass_rt_W2 = ji_D & cal_i_W & rt_D == rt_W & rt_D ! = 0;
-    assign bypass_rt_W3 = ji_D & cal_r_W & rt_D == rd_W & rt_D ! = 0;
+    assign forward_rs_M0 = jr_D & jal_M & rs_D == 31;
+    assign forward_rs_M1 = jr_D & cal_i_M & rs_D == rt_M & rs_D ! = 0;
+    assign forward_rs_M2 = jr_D & cal_r_M & rs_D == rd_M & rs_D ! = 0;
 
-    assign bypass_rt_M =
-           bypass_rt_M0 |
-           bypass_rt_M1 |
-           bypass_rt_M2 ;
 
-    assign bypass_rt_W =
-           bypass_rt_W0 |
-           bypass_rt_W1 |
-           bypass_rt_W2 |
-           bypass_rt_W3 ;
+    assign forward_rs_W0 = jr_D & jal_W & rs_D == 31;
+    assign forward_rs_W1 = jr_D & load_W & rs_D == rt_W & rs_D ! = 0;
+    assign forward_rs_W2 = jr_D & cal_i_W & rs_D == rt_W & rs_D ! = 0;
+    assign forward_rs_W3 = jr_D & cal_r_W & rs_D == rd_W & rs_D ! = 0;
+
+    assign forward_rs_M =
+
+           forward_rs_M0 |
+           forward_rs_M1 |
+           forward_rs_M2 ;
+
+    assign forward_rs_W =
+           forward_rs_W0 |
+           forward_rs_W1 |
+           forward_rs_W2 |
+           forward_rs_W3 ;
 
     always @(*)
     begin
-        if (bypass_rt_E)
-            bypass_rt_ji = 1;
-        else if (bypass_rt_M)
-            bypass_rt_ji = 2;
-        else if (bypass_rt_W)
-            bypass_rt_ji = 3;
+        if (forward_rs_E)
+            forward_rs_jr      = 1;
+        else if (forward_rs_M)
+            forward_rs_jr = 2;
+        else if (forward_rs_W)
+            forward_rs_jr = 3;
         else
-            bypass_rt_ji = 0;
+            forward_rs_jr                  = 0;
     end
 
 

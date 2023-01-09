@@ -20,11 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-module bypass_jr(input [31:0] instrD,
-                     input [31:0] instrE,
-                     input [31:0] instrM,
-                     input [31:0] instrW,
-                     output reg [1:0] bypass_rs_jr);
+module forward_rt_alu_(input [31:0] instrD,
+                          input [31:0] instrE,
+                          input [31:0] instrM,
+                          input [31:0] instrW,
+                          output reg [1:0] forward_rt_alu);
     wire [4:0] rs_D;
     wire [4:0] rt_D;
     wire [4:0] rd_D;
@@ -38,54 +38,79 @@ module bypass_jr(input [31:0] instrD,
     wire [4:0] rt_W;
     wire [4:0] rd_W;
 
-    wire bypass_rs_E, bypass_rs_M, bypass_rs_W;
+    wire forward_rt_M0;
+    wire forward_rt_M1;
+    wire forward_rt_M2;
+    wire forward_rt_M3;
+    wire forward_rt_M4;
+    wire forward_rt_M5;
+    wire forward_rt_M;
 
-    wire bypass_rs_M0;
-    wire bypass_rs_M1;
-    wire bypass_rs_M2;
+    wire forward_rt_W0 ;
+    wire forward_rt_W1 ;
+    wire forward_rt_W2 ;
+    wire forward_rt_W3 ;
+    wire forward_rt_W4 ;
+    wire forward_rt_W5 ;
+    wire forward_rt_W6 ;
+    wire forward_rt_W7 ;
+    wire forward_rt_W ;
 
-    wire bypass_rs_W0 ;
-    wire bypass_rs_W1 ;
-    wire bypass_rs_W2 ;
-    wire bypass_rs_W3 ;
+    assign forward_rt_M0 = cal_r_E & cal_r_M & rd_M == rt_E & rt_E ! = 0;
+    assign forward_rt_M1 = cal_r_E & cal_i_M & rt_M == rt_E & rt_E ! = 0;
+    assign forward_rt_M2 = cal_r_E & jal_M & rt_E == 31;
 
-    assign bypass_rs_E = jr_D & jal_E & rs_D == 31;
-
-
-    assign bypass_rs_M0 = jr_D & jal_M & rs_D == 31;
-    assign bypass_rs_M1 = jr_D & cal_i_M & rs_D == rt_M & rs_D ! = 0;
-    assign bypass_rs_M2 = jr_D & cal_r_M & rs_D == rd_M & rs_D ! = 0;
+    assign forward_rt_M3 = store_E & cal_r_M & rd_M == rt_E & rt_E ! = 0;
+    assign forward_rt_M4 = store_E & cal_i_M & rt_M == rt_E & rt_E ! = 0;
+    assign forward_rt_M5 = store_E & jal_M & rt_E == 31;
 
 
-    assign bypass_rs_W0 = jr_D & jal_W & rs_D == 31;
-    assign bypass_rs_W1 = jr_D & load_W & rs_D == rt_W & rs_D ! = 0;
-    assign bypass_rs_W2 = jr_D & cal_i_W & rs_D == rt_W & rs_D ! = 0;
-    assign bypass_rs_W3 = jr_D & cal_r_W & rs_D == rd_W & rs_D ! = 0;
+    assign forward_rt_M =
+           forward_rt_M0 |
+           forward_rt_M1 |
+           forward_rt_M2 |
+           forward_rt_M3 |
+           forward_rt_M4 |
+           forward_rt_M5 ;
 
-    assign bypass_rs_M =
+    assign forward_rt_W0 = cal_r_E & cal_r_W & rd_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W1 = cal_r_E & cal_i_W & rt_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W2 = cal_r_E & load_W  & rt_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W3 = cal_r_E & jal_W & rt_E == 31;
 
-           bypass_rs_M0 |
-           bypass_rs_M1 |
-           bypass_rs_M2 ;
 
-    assign bypass_rs_W =
-           bypass_rs_W0 |
-           bypass_rs_W1 |
-           bypass_rs_W2 |
-           bypass_rs_W3 ;
+    assign forward_rt_W4 = store_E & cal_r_W & rd_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W5 = store_E & cal_i_W & rt_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W6 = store_E & load_W  & rt_W == rt_E & rt_E ! = 0;
+    assign forward_rt_W7 = store_E & jal_W & rt_E == 31;
+
+
+    assign forward_rt_W =
+           forward_rt_W0 |
+           forward_rt_W1 |
+           forward_rt_W2 |
+           forward_rt_W3 |
+           forward_rt_W4 |
+           forward_rt_W5 |
+           forward_rt_W6 |
+           forward_rt_W7 ;
+
 
     always @(*)
     begin
-        if (bypass_rs_E)
-            bypass_rs_jr      = 1;
-        else if (bypass_rs_M)
-            bypass_rs_jr = 2;
-        else if (bypass_rs_W)
-            bypass_rs_jr = 3;
+        if (forward_rt_M)
+        begin
+            forward_rt_alu = 1;
+        end
+        else if (forward_rt_W)
+        begin
+            forward_rt_alu = 2;
+        end
         else
-            bypass_rs_jr                  = 0;
+        begin
+            forward_rt_alu = 0;
+        end
     end
-
 
     hctrl hctrl_D (
               .instr(instrD),
